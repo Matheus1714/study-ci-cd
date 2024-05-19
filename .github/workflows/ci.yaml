@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  front-end-tests:
+    name: Run front-end tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+      
+      - name: Install yarn
+        run: npm install --global yarn
+      
+      - name: Install Dependences
+        run: |
+          cd ./app/web
+          yarn install
+      
+      - name: Run Tests
+        run: |
+          cd ./app/web
+          yarn test
