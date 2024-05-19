@@ -15,7 +15,7 @@ app.register(baseRoute);
 app.register(getAllUsersRoute);
 
 app.listen({
-    port: 8888
+    port: parseInt(process.env.PORT || '', 10) || 8888
 }).then(() => {
     console.log('HTTP Server Running!')
 });
