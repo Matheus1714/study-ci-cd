@@ -4,18 +4,24 @@ import { fastify } from 'fastify';
 import { baseRoute } from './routes/base';
 import { getAllUsersRoute } from './routes/user/get-all-users';
 
-const app = fastify()
+export function init() {
+    const app = fastify()
 
-app.register(fastifyCors, {
-    origin: '*'
-})
+    app.register(fastifyCors, {
+        origin: '*'
+    })
 
-app.register(baseRoute);
+    app.register(baseRoute);
 
-app.register(getAllUsersRoute);
+    app.register(getAllUsersRoute);
 
-app.listen({
-    port: parseInt(process.env.PORT || '', 10) || 8888
-}).then(() => {
-    console.log('HTTP Server Running!')
-});
+    return app;
+}
+
+if( require.main === module ) {
+    init().listen({
+        port: 8888
+    }).then(() => {
+        console.log('HTTP Server Running!')
+    });
+}
