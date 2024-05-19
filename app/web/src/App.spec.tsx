@@ -1,7 +1,7 @@
 
 import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/react';
-import { describe, expect, vi, it, beforeEach } from 'vitest';
+import { describe, expect, vi, it, beforeEach, Mock } from 'vitest';
 import { App } from './App';
 import { getAllUsers } from './api';
 
@@ -16,7 +16,7 @@ const mockUsers = [
 
 describe('App component', () => {
     beforeEach(() => {
-        (getAllUsers as jest.Mock).mockResolvedValue(mockUsers);
+        (getAllUsers as Mock).mockResolvedValue(mockUsers);
     });
 
     it('should renders user data correctly', async () => {
