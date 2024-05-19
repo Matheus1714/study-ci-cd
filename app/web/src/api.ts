@@ -6,7 +6,7 @@ export type User = {
 
 export async function getAllUsers(): Promise<User[]> {
     try{
-        const response = await fetch('http://localhost:8888/user');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/user`);
         const { users } = await response.json() as { users: User[] };
         return users;
     } catch(error) {
